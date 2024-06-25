@@ -1,17 +1,19 @@
 import React from 'react';
-// import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import UpperNavbar from './components/UpperNavbar';
+import DetailPage from './pages/DetailPage';
+import MainPage from './pages/MainPage';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-          Default
-        </button>
-      </header>
+    <div>
+      <UpperNavbar />
+      <Routes>
+        <Route path="/main" element={<MainPage />} />
+        <Route path="/detail" element={<DetailPage />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
