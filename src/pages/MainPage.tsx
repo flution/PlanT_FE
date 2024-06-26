@@ -1,7 +1,7 @@
 import React from 'react';
 
 import VerticalCard from '../components/VerticalCard';
-import HorizontalCard from '../components/HorizontalCard';
+import HorizontalCard from '../components/Card/HorizontalCard';
 
 const MainPage: React.FC = () => {
   return (
