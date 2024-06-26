@@ -3,12 +3,12 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "node_modules/flowbite/**/*.{js,jsx,ts,tsx}",],
   theme: {
     extend: {
-      spacing: {},
-      colors : {
-        "main-color": "#BFE647",
-        "hover-color": "#89C73E",
-        "gray-light": "#E0E0E0",
-        "focus-color" : "#89C73E",
+      colors: {
+        "main-green": "#BFE647",
+        "hover-green": "#89C73E",
+        "gray-light": "#F9F9F9",
+        "gray-middle": "#E0E0E0",
+        "gray-dark": "#C9C9C9",
       fontSize: {
         bigBtn: ["20px", "23px"],
         FltBtn: ["15px", "12px"],

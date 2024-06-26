@@ -66,7 +66,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       type="button"
-      className={`w-[300px] h-[60px] text-FltBtn text-center rounded-[10px] px-5 py-2.5 mb-2 focus:outline-none ${isDisabled ? 'bg-gray-300 text-gray-600 cursor-not-allowed' : 'bg-main-color text-black hover:bg-hover-color'}`}
+      className={`w-[300px] h-[60px] text-FltBtn text-center rounded-[10px] px-5 py-2.5 mb-2 focus:outline-none ${isDisabled ? 'bg-gray-300 text-gray-600 cursor-not-allowed' : 'bg-main-green text-black hover:bg-hover-green'}`}
       disabled={isDisabled}
       onClick={handleClick}
     >

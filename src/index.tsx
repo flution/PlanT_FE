@@ -5,7 +5,8 @@ import App from './App';
 import LandingPage from './pages/LandingPage';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/Login/LoginPage';
+import LocalLogin from './pages/Login/LocalLoginPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -17,6 +18,7 @@ root.render(
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/local" element={<LocalLogin />} />
         <Route path="/*" element={<App />} />
       </Routes>
     </Router>
