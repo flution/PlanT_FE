@@ -13,17 +13,17 @@ const VerticalCard: React.FC = () => {
   return (
     <div>
       <div
-        className="max-w-[300px] max-h-[250px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        className="w-[300px] h-[250px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         onClick={handleMoreClick}
       >
         {/* card img */}
         <a href="#">
-          <img className="rounded-t-lg" src={eximgV} alt="" />
+          <img className="h-[150px] rounded-t-lg" src={eximgV} alt="" />
         </a>
 
         <div className="p-5">
           {/* card content top */}
-          <div className="flex justify-between mb-3">
+          <div className="flex justify-between mb-3.5">
             {/* card title */}
             <a href="#">
               <h5 className="text-xs font-['Nexon-Bold'] tracking-tight text-gray-900 dark:text-white">
@@ -68,10 +68,15 @@ const VerticalCard: React.FC = () => {
           </div>
 
           {/* card content bottom */}
+          {/* 임시로 p태그 3개 이용하여 텍스트 출력 */}
           <p className="text-[6px] font-['Nexon-Bold'] text-gray-dark dark:text-gray-400 whitespace-pre-line">
-            내용 텍스트를 첨부하고 싶은 만큼 첨부해야합니다. 장평은 4로 조절하며
-            자간은 따로 없습니다. 웬만하면 회색조의 글로 쓸 수 있게 만들어
-            줍시다.
+            내용 텍스트를 첨부하고 싶은 만큼 첨부해야합니다.
+          </p>
+          <p className="text-[6px] font-['Nexon-Bold'] text-gray-dark dark:text-gray-400 whitespace-pre-line">
+            장평은 4로 조절하며 자간은 따로 없습니다.
+          </p>
+          <p className="text-[6px] font-['Nexon-Bold'] text-gray-dark dark:text-gray-400 whitespace-pre-line">
+            웬만하면 회색조의 글로 쓸 수 있게 만들어 줍시다.
           </p>
 
           {/* card btn */}
