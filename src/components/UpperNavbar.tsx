@@ -12,8 +12,8 @@ const UpperNavbar: React.FC = () => {
   };
 
   return (
-    <nav className="border-gray-200 bg-slate-50 shadow-gray-50">
-      <div className="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
+    <nav className="border-gray-200 bg-white  shadow-gray-50">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           {isMainPage ? (
             <img
@@ -34,7 +34,7 @@ const UpperNavbar: React.FC = () => {
         </a>
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img
-            src="/img/bell.svg"
+            src="/img/Alarm2.svg"
             className="h-6"
             alt=""
             style={{ marginRight: '10px', marginTop: '10px' }}
