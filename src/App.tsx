@@ -1,6 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+
 import UpperNavbar from './components/UpperNavbar';
+import BottomNavbar from './components/BottomNavbar';
+
 import DetailPage from './pages/DetailPage';
 import MainPage from './pages/MainPage';
 import Alert from './components/Alert/Alert';
@@ -19,6 +22,7 @@ const App: React.FC = () => {
         isOpen={true}
         text={'사용자 정보 활용에 동의하십니?'}
       ></ModalRequest>
+      <BottomNavbar />
     </div>
   );
 };
