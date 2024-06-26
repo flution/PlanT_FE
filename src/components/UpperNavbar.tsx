@@ -6,10 +6,15 @@ const UpperNavbar: React.FC = () => {
   const navigate = useNavigate();
 
   const isMainPage = location.pathname === '/main';
-  const isLocalLoginPage = location.pathname === '/locallogin'; // 로컬 로그인 페이지 경로
+  const isLocalLoginPage = location.pathname === '/local';
+  const isLocalSignupPage = location.pathname === '/local/signup';
 
   const handleBackClick = () => {
-    navigate('/main'); // 이전 페이지로 이동
+    if (isLocalLoginPage || isLocalSignupPage) {
+      navigate(-1); // 뒤로 가기
+    } else {
+      navigate('/main'); // main 페이지로 이동
+    }
   };
 
   return (
@@ -33,7 +38,7 @@ const UpperNavbar: React.FC = () => {
             />
           )}
         </a>
-        {!isLocalLoginPage && (
+        {!isLocalLoginPage && !isLocalSignupPage && (
           <a
             href="#"
             className="flex items-center space-x-3 rtl:space-x-reverse"
