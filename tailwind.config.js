@@ -5,9 +5,10 @@ module.exports = {
     extend: {
       colors: {
         "main-green": "#BFE647",
-        "hover_color": "#89C73E",
+        "hover-green": "#89C73E",
         "gray-light": "#F9F9F9",
         "gray-middle": "#E0E0E0",
+        "gray-dark": "#C9C9C9",
       },
     },
   },
