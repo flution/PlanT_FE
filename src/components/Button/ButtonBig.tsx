@@ -1,8 +1,9 @@
-import React from "react";
+import React from 'react';
 
 interface ButtonProps {
   text: string;
   bgColor: string;
+  onClick?: () => void;
 }
 
 const ButtonBig: React.FC<ButtonProps> = ({ text, bgColor }) => {
@@ -10,11 +11,10 @@ const ButtonBig: React.FC<ButtonProps> = ({ text, bgColor }) => {
     <button
       type="button"
       className={`
-        w-[320px] h-[60px] text-bigBtn
-        text-center rounded-[10px] px-5 py-2.5 me-2 mb-2
-        focus:outline-none text-black bg-${bgColor}
+        w-[215px] h-[35px] rounded-[6px] px-5 py-2
+        text-bigBtn text-center leading-4 font-[Nexon-Medium] 
+        text-black bg-${bgColor} border border-solid border-main-color box-border
         hover:bg-hover-color`}
-
     >
       {text}
     </button>

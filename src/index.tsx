@@ -5,7 +5,7 @@ import App from './App';
 import LandingPage from './pages/LandingPage';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/Login/LoginPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
