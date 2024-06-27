@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LCarousel from '../components/LCarousel';
+import LCarousel from '../components/Landing/LCarousel';
 import Button from '../components/Button/CarouselButton';
 import { CarouselInterface } from 'flowbite';
 
