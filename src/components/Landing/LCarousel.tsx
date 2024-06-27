@@ -39,7 +39,7 @@ const LCarousel: React.FC<{
         defaultPosition: 0,
         interval: 3000,
         indicators: {
-          activeClasses: 'bg-main-color',
+          activeClasses: 'bg-main-green',
           inactiveClasses:
             'bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800',
           items: [

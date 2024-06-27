@@ -6,7 +6,7 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-const ButtonBig: React.FC<ButtonProps> = ({ text, bgColor }) => {
+const ButtonBig: React.FC<ButtonProps> = ({ text, bgColor = '#BFE647' }) => {
   return (
     <button
       type="button"

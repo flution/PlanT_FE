@@ -36,7 +36,7 @@ const SearchBar: React.FC = () => {
         />
         <button
           type="submit"
-          className="text-white absolute right-2.5 bottom-2.5 bg-main-color hover:bg-hover-color focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-main-color dark:hover:bg-hover-color dark:focus:ring-blue-800"
+          className="text-white absolute right-2.5 bottom-2.5 bg-main-green hover:bg-hover-green focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-main-green dark:hover:bg-hover-green dark:focus:ring-blue-800"
         >
           검색하기
         </button>
