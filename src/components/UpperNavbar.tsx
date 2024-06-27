@@ -6,11 +6,10 @@ const UpperNavbar: React.FC = () => {
   const navigate = useNavigate();
 
   const isMainPage = location.pathname === '/main';
-  const isLocalLoginPage = location.pathname === '/local';
-  const isLocalSignupPage = location.pathname === '/local/signup';
+  const isLocalPage = location.pathname.startsWith('/local');
 
   const handleBackClick = () => {
-    if (isLocalLoginPage || isLocalSignupPage) {
+    if (isLocalPage) {
       navigate(-1); // 뒤로 가기
     } else {
       navigate('/main'); // main 페이지로 이동
@@ -38,7 +37,7 @@ const UpperNavbar: React.FC = () => {
             />
           )}
         </a>
-        {!isLocalLoginPage && !isLocalSignupPage && (
+        {!isLocalPage && (
           <a
             href="#"
             className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -46,7 +45,7 @@ const UpperNavbar: React.FC = () => {
             <img
               src="/img/Alarm2.svg"
               className="h-6"
-              alt=""
+              alt="Alarm"
               style={{ marginRight: '10px', marginTop: '10px' }}
             />
           </a>

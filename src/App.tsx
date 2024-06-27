@@ -4,6 +4,7 @@ import UpperNavbar from './components/UpperNavbar';
 import BottomNavbar from './components/BottomNavbar';
 import DetailPage from './pages/DetailPage';
 import MainPage from './pages/MainPage';
+import './index.css';
 
 const App: React.FC = () => {
   return (
