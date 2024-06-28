@@ -6,9 +6,6 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleNaverLogin = () => {
-    // const naverLoginUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_NAVER_CALLBACK_URL}&state=${Math.random()
-    //   .toString(36)
-    //   .substring(3, 14)}`;
     const naverLoginUrl = `http://localhost:8080/auth/naver/login`;
     window.location.href = naverLoginUrl;
   };
