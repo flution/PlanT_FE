@@ -1,12 +1,13 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import UpperNavbar from './components/UpperNavbar';
-import BottomNavbar from './components/BottomNavbar';
+import UpperNavbar from './components/Navbar/UpperNavbar';
+import BottomNavbar from './components/Navbar/BottomNavbar';
 // pages
 import DetailPage from './pages/DetailPage';
 import MainPage from './pages/MainPage';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/Login/LoginPage';
+import AuthSuccessPage from './pages/Login/NaverAuthSuccess';
 
 const App: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
         <Route path="/main" element={<MainPage />} />
         <Route path="/detail" element={<DetailPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/auth/success" element={<AuthSuccessPage />} />
       </Routes>
       <BottomNavbar />
     </div>
