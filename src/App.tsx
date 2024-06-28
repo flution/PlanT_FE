@@ -18,6 +18,7 @@ const App: React.FC = () => {
         <Route path="/main" element={<MainPage />} />
         <Route path="/detail" element={<DetailPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/auth/success" element={<AuthSuccessPage />} />
       </Routes>
       <BottomNavbar />
     </div>
