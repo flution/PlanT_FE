@@ -10,7 +10,13 @@ const AuthSuccessPage: React.FC = () => {
 
     if (token) {
       console.log('Received token:', token);
-      localStorage.setItem('naverAuthToken', token);
+
+      // 네이버 토큰과 카카오 토큰을 구분하여 저장
+      if (params.has('kakao')) {
+        localStorage.setItem('kakaoAuthToken', token);
+      } else {
+        localStorage.setItem('naverAuthToken', token);
+      }
 
       navigate('/main');
     }

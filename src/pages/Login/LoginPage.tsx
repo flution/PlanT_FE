@@ -11,7 +11,8 @@ const LoginPage: React.FC = () => {
   };
 
   const handleKakaoLogin = () => {
-    navigate('/kakaoLogin');
+    const kakaoLoginUrl = `http://localhost:8080/auth/kakao/login`;
+    window.location.href = kakaoLoginUrl;
   };
 
   const handleGoogleLogin = () => {
