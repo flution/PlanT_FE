@@ -7,7 +7,7 @@ import BottomNavbar from './components/Navbar/BottomNavbar';
 import DetailPage from './pages/DetailPage';
 import MainPage from './pages/MainPage';
 import LoginPage from './pages/Login/LoginPage';
-import AuthSuccessPage from './pages/Login/NaverAuthSuccess';
+import AuthSuccessPage from './pages/Login/AuthSuccess';
 
 const App: React.FC = () => {
   return (
