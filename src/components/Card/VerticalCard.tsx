@@ -1,6 +1,6 @@
 import React from 'react';
 
-import eximgV from '../assets/images/eximgV.png';
+import eximgV from '../../assets/images/eximgV.png';
 import { useNavigate } from 'react-router-dom';
 
 const VerticalCard: React.FC = () => {

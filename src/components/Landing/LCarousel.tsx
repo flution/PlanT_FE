@@ -7,9 +7,9 @@ import type {
 } from 'flowbite';
 import type { InstanceOptions } from 'flowbite';
 
-import carousel1 from '../assets/carousel/carousel01.jpg';
-import carousel2 from '../assets/carousel/carousel02.jpg';
-import carousel3 from '../assets/carousel/carousel03.jpeg';
+import carousel1 from '../../assets/carousel/carousel01.jpg';
+import carousel2 from '../../assets/carousel/carousel02.jpg';
+import carousel3 from '../../assets/carousel/carousel03.jpeg';
 
 const LCarousel: React.FC<{
   onCarouselInstance: (instance: CarouselInterface | null) => void;

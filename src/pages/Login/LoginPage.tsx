@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ButtonBig from '../components/Button/ButtonBig';
-import LoginBtnNaverImage from '../assets/images/LoginBtnNaver.svg';
-import LoginBtnKakaoImage from '../assets/images/LoginBtnKakao.svg';
-import LoginBtnGoogleImage from '../assets/images/LoginBtnGoogle.svg';
+import ButtonBig from '../../components/Button/ButtonBig';
+import LoginBtnNaverImage from '../../assets/images/LoginBtnNaver.svg';
+import LoginBtnKakaoImage from '../../assets/images/LoginBtnKakao.svg';
+import LoginBtnGoogleImage from '../../assets/images/LoginBtnGoogle.svg';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import React from 'react';
-import UpperNavbar from '../../components/UpperNavbar';
+import UpperNavbar from '../../components/Navbar/UpperNavbar';
 import ButtonBig from '../../components/Button/ButtonBig';
 import { Link } from 'react-router-dom';
 // import '../../index.css';
