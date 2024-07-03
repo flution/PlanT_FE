@@ -1,19 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ButtonBig from '../../components/Button/ButtonBig';
-import LoginBtnNaverImage from '../../assets/images/LoginBtnNaver.svg';
-import LoginBtnKakaoImage from '../../assets/images/LoginBtnKakao.svg';
-import LoginBtnGoogleImage from '../../assets/images/LoginBtnGoogle.svg';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleNaverLogin = () => {
-    navigate('/naverLogin');
+    const naverLoginUrl = `http://localhost:8080/auth/naver/login`;
+    window.location.href = naverLoginUrl;
   };
 
   const handleKakaoLogin = () => {
-    navigate('/kakaoLogin');
+    const kakaoLoginUrl = `http://localhost:8080/auth/kakao/login`;
+    window.location.href = kakaoLoginUrl;
   };
 
   const handleGoogleLogin = () => {
@@ -34,13 +33,13 @@ const LoginPage: React.FC = () => {
 
   return (
     <div>
-      <div className="flex justify-around mt-96 mx-16">
-        <img src={LoginBtnNaverImage} onClick={handleNaverLogin}></img>
-        <img src={LoginBtnKakaoImage} onClick={handleKakaoLogin}></img>
-        <img src={LoginBtnGoogleImage} onClick={handleGoogleLogin}></img>
+      <div className="flex justify-around mx-16 mt-96">
+        <img src="/img/LoginBtnNaver.svg" onClick={handleNaverLogin}></img>
+        <img src="/img/LoginBtnKakao.svg" onClick={handleKakaoLogin}></img>
+        <img src="/img/LoginBtnGoogle.svg" onClick={handleGoogleLogin}></img>
       </div>
       <div>
-        <div className="mt-4 flex justify-center" onClick={handleLogin}>
+        <div className="flex justify-center mt-4" onClick={handleLogin}>
           <ButtonBig text="이메일로 시작하기" bgColor="main-color" />
         </div>
         <div className="mt-2.5 flex justify-center" onClick={handleRegister}>
