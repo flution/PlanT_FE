@@ -16,7 +16,8 @@ const LoginPage: React.FC = () => {
   };
 
   const handleGoogleLogin = () => {
-    navigate('/googleLogin');
+    const googleLoginUrl = `http://localhost:8080/auth/google/login`;
+    window.location.href = googleLoginUrl;
   };
 
   const handleLogin = () => {

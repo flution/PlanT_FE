@@ -16,6 +16,8 @@ const AuthSuccessPage: React.FC = () => {
         localStorage.setItem('kakaoAuthToken', token);
       } else if (params.get('naver')) {
         localStorage.setItem('naverAuthToken', token);
+      } else if (params.get('google')) {
+        localStorage.setItem('googleAuthToken', token);
       }
 
       navigate('/main');
