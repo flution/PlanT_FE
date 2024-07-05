@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 import UpperNavbar from '../../components/Navbar/UpperNavbar';
 import ButtonBig from '../../components/Button/ButtonBig';
-import axios from 'axios';
 
 const LocalSignup: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [birth, setBirth] = useState('');
+  const navigate = useNavigate();
 
   // 생년월일 입력 시 자동으로 '-' 삽입
   const handleBirthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +44,7 @@ const LocalSignup: React.FC = () => {
 
       if (response.status === 201) {
         alert('회원가입이 완료되었습니다.');
+        navigate('/main');
       } else {
         alert('회원가입에 실패했습니다.');
       }
