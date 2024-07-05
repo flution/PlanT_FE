@@ -6,7 +6,11 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-const ButtonBig: React.FC<ButtonProps> = ({ text, bgColor = '#BFE647' }) => {
+const ButtonBig: React.FC<ButtonProps> = ({
+  text,
+  bgColor = '#BFE647',
+  onClick,
+}) => {
   return (
     <button
       type="button"
@@ -15,6 +19,7 @@ const ButtonBig: React.FC<ButtonProps> = ({ text, bgColor = '#BFE647' }) => {
         text-bigBtn text-center leading-4 font-[Nexon-Medium] 
         text-black bg-${bgColor} border border-solid border-main-color box-border
         hover:bg-hover-color`}
+      onClick={onClick}
     >
       {text}
     </button>

@@ -1,10 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 import UpperNavbar from '../../components/Navbar/UpperNavbar';
 import ButtonBig from '../../components/Button/ButtonBig';
-import { Link } from 'react-router-dom';
-// import '../../index.css';
 
 const LocalLoginPage: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(
+        'http://localhost:8080/api/users/local',
+        {
+          u_email: email,
+          u_pw: password,
+        },
+      );
+
+      if (response.status === 200) {
+        alert('로그인이 완료되었습니다.');
+        navigate('/main');
+      } else {
+        alert('로그인에 실패했습니다.');
+      }
+    } catch (error) {
+      console.error('Error login up:', error);
+      alert('로그인 중 오류가 발생했습니다.');
+    }
+  };
+
   return (
     <div>
       <div>
@@ -29,6 +56,8 @@ const LocalLoginPage: React.FC = () => {
                 id="floating_email"
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
               <label
@@ -45,6 +74,8 @@ const LocalLoginPage: React.FC = () => {
                 id="floating_password"
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
               <label
@@ -57,7 +88,11 @@ const LocalLoginPage: React.FC = () => {
           </form>
           <div className="flex justify-center w-full mt-3">
             <div className="flex justify-center w-10/12 max-w-xs">
-              <ButtonBig text={'로그인'} bgColor={'#BFE647'} />
+              <ButtonBig
+                text={'로그인'}
+                bgColor={'#BFE647'}
+                onClick={handleLogin}
+              />
             </div>
           </div>
           <div className="flex justify-center w-full">

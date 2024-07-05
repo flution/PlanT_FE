@@ -16,7 +16,8 @@ const LoginPage: React.FC = () => {
   };
 
   const handleGoogleLogin = () => {
-    navigate('/googleLogin');
+    const googleLoginUrl = `http://localhost:8080/auth/google/login`;
+    window.location.href = googleLoginUrl;
   };
 
   const handleLogin = () => {
@@ -34,9 +35,6 @@ const LoginPage: React.FC = () => {
   return (
     <div>
       <div className="flex justify-around mx-16 mt-96">
-        {/* <img src={LoginBtnNaver} onClick={handleNaverLogin}></img>
-        <img src={LoginBtnKakao} onClick={handleKakaoLogin}></img>
-        <img src={LoginBtnGoogle} onClick={handleGoogleLogin}></img> */}
         <img src="/img/LoginBtnNaver.svg" onClick={handleNaverLogin}></img>
         <img src="/img/LoginBtnKakao.svg" onClick={handleKakaoLogin}></img>
         <img src="/img/LoginBtnGoogle.svg" onClick={handleGoogleLogin}></img>

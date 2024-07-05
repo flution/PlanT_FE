@@ -13,7 +13,6 @@ const App: React.FC = () => {
   return (
     <div>
       <UpperNavbar />
-      <BottomNavbar />
       <Routes>
         <Route path="/main" element={<MainPage />} />
         <Route path="/detail" element={<DetailPage />} />
