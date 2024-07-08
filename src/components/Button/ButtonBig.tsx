@@ -17,8 +17,8 @@ const ButtonBig: React.FC<ButtonProps> = ({
       className={`
         w-[215px] h-[35px] rounded-[6px] px-5 py-2
         text-bigBtn text-center leading-4 font-[Nexon-Medium] 
-        text-black bg-${bgColor} border border-solid border-main-color box-border
-        hover:bg-hover-color`}
+        text-black bg-${bgColor} border border-solid border-main-green box-border
+        hover:bg-hover-green`}
       onClick={onClick}
     >
       {text}

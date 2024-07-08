@@ -41,7 +41,7 @@ const LoginPage: React.FC = () => {
       </div>
       <div>
         <div className="flex justify-center mt-4" onClick={handleLogin}>
-          <ButtonBig text="이메일로 시작하기" bgColor="main-color" />
+          <ButtonBig text="이메일로 시작하기" bgColor="main-green" />
         </div>
         <div className="mt-2.5 flex justify-center" onClick={handleRegister}>
           <ButtonBig text="회원가입" bgColor="white" />
