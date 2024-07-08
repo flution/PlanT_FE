@@ -2,6 +2,7 @@ import React from 'react';
 
 import VerticalCard from '../components/Card/VerticalCard';
 import HorizontalCard from '../components/Card/HorizontalCard';
+// import SearchBar from '../components/Search/SearchBar';
 
 const MainPage: React.FC = () => {
   return (
