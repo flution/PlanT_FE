@@ -8,10 +8,11 @@ module.exports = {
     extend: {
       spacing: {},
       colors: {
-        "main-color": "#BFE647",
-        "hover-color": "#89C73E",
-        "gray-light": "#E0E0E0",
-        "focus-color": "#89C73E",
+        "main-green": "#BFE647",
+        "hover-green": "#89C73E",
+        "gray-light": "#F9F9F9",
+        "gray-middle": "#E0E0E0",
+        "gray-dark": "#C9C9C9",
         fontSize: {
           bigBtn: ["12px", "12px"],
           FltBtn: ["15px", "12px"],
