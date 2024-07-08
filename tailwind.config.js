@@ -9,8 +9,15 @@ module.exports = {
         "hover-color": "#89C73E",
         "gray-light": "#E0E0E0",
         "focus-color" : "#89C73E",
+      fontSize: {
+        bigBtn: ["20px", "23px"],
+        FltBtn: ["15px", "12px"],
+        midBtn: ["15px", "17px"],
+        smlBtn: ["10px", "11px"],
+        alert: ["15px", "30px"],
       },
     },
   },
   plugins: ["flowbite/plugin"],
-};
+}
+}
