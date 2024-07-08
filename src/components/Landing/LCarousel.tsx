@@ -221,5 +221,3 @@ const LCarousel: React.FC<{
 };
 
 export default LCarousel;
-
-
