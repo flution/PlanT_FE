@@ -14,7 +14,6 @@ import SearchPage from './pages/SearchPage';
 const App: React.FC = () => {
   return (
     <div>
-      {/* {!hideNavbarPaths.includes(location.pathname) && } */}
       <UpperNavbar />
       <Routes>
         <Route path="/main" element={<MainPage />} />
