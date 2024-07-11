@@ -1,13 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import SearchButton from '../Button/SearchButton';
+import HorizontalCard from '../Card/HorizontalCard';
+
+interface Result {
+  name: string;
+}
 
 const SearchBar: React.FC = () => {
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<{ name: string }[]>([]);
+  const [results, setResults] = useState<Result[]>([]);
+  const [visibleResults, setVisibleResults] = useState<Result[]>([]);
+  const [index, setIndex] = useState(0); //현재 보여주고 있는 데이터의 인덱스
+  const batchSize = 3; // 한 번에 보여줄 데이터 개수
+  const [isLoading, setIsLoading] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const observer = useRef<IntersectionObserver | null>(null);
+
+  const lastItemRef = useCallback(
+    (node: HTMLLIElement) => {
+      if (isLoading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && index < results.length) {
+          loadMoreItems();
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [isLoading, index, results.length],
+  );
+
+  useEffect(() => {
+    if (query.trim() !== '') {
+      search();
+    }
+  }, [query]);
+  const loadMoreItems = () => {
+    setIsLoading(true);
+    setVisibleResults((prevVisibleResults) => [
+      ...prevVisibleResults,
+      ...results.slice(index, index + batchSize),
+    ]);
+    setIndex((prevIndex) => prevIndex + batchSize);
+    console.log('load');
+    setIsLoading(false);
+  };
+
+  const search = async () => {
+    setIndex(0);
+    setVisibleResults([]);
+    setResults([]);
+    setIsLoading(true);
 
     const mockResults = [
       { name: '서울' },
@@ -15,21 +59,78 @@ const SearchBar: React.FC = () => {
       { name: '제주도' },
       { name: '강릉' },
       { name: '전주' },
+      { name: '서울' },
+      { name: '부산' },
+      { name: '제주도' },
+      { name: '강릉' },
+      { name: '전주' },
+      { name: '서울' },
+      { name: '부산' },
+      { name: '제주도' },
+      { name: '강릉' },
+      { name: '전주' },
+      { name: '서울' },
+      { name: '부산' },
+      { name: '제주도' },
+      { name: '강릉' },
+      { name: '전주' },
+      { name: '서울' },
+      { name: '부산' },
+      { name: '제주도' },
+      { name: '강릉' },
+      { name: '전주' },
+      { name: '서울' },
+      { name: '부산' },
+      { name: '제주도' },
+      { name: '강릉' },
+      { name: '전주' },
+      { name: '서울' },
+      { name: '부산' },
+      { name: '제주도' },
+      { name: '강릉' },
+      { name: '전주' },
+      { name: '서울' },
+      { name: '부산' },
+      { name: '제주도' },
+      { name: '강릉' },
+      { name: '전주' },
     ];
 
-    if (query.trim() === '') {
-      // 공백 상황에서는 모든 데이터를 가나다 순으로 정렬하여 호출
-      const sortedResults = mockResults.sort((a, b) =>
-        a.name.localeCompare(b.name),
-      );
-      setResults(sortedResults);
-    } else {
-      // 검색어와 일치하는 결과를 필터링하고 가나다 순으로 정렬
-      const filteredResults = mockResults
-        .filter((result) => result.name.includes(query))
-        .sort((a, b) => a.name.localeCompare(b.name));
-      setResults(filteredResults);
+    try {
+      const response = await fetch(`https://api.example.com/search?q=${query}`);
+      const data = await response.json();
+      if (query.trim() === '') {
+        // 공백 상황에서는 모든 데이터를 가나다 순으로 정렬하여 호출
+        const sortedResults = data.sort((a: Result, b: Result) =>
+          a.name.localeCompare(b.name),
+        );
+        setResults(sortedResults);
+      } else {
+        // 검색어와 일치하는 결과를 필터링하고 가나다 순으로 정렬
+        const filteredResults = data
+          .filter((result: Result) => result.name.includes(query))
+          .sort((a: Result, b: Result) => a.name.localeCompare(b.name));
+        setResults(filteredResults);
+      }
+      setResults([...mockResults, ...results]);
+      setVisibleResults(results.slice(0, batchSize));
+      setIndex(batchSize);
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+    } finally {
+      setIsLoading(false);
     }
+
+    // //무한스크롤 작동 테스트 코드
+    // setResults(mockResults);
+    // setVisibleResults(results.slice(0, batchSize));
+    // setIndex(batchSize);
+    // setIsLoading(false);
+  };
+
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    search();
 
     // API 호출 부분은 주석 처리
     // try {
@@ -92,16 +193,21 @@ const SearchBar: React.FC = () => {
           </div>
         </div>
       </form>
-      <div>
-        {results.length > 0 && (
+      <div className="flex flex-col items-center pb-16">
+        {visibleResults.length > 0 && (
           <ul className="mt-4">
-            {results.map((result, index) => (
-              <li key={index} className="p-2 border-b border-gray-300">
-                {result.name}
+            {visibleResults.map((result, index) => (
+              <li
+                key={index}
+                className="p-2"
+                ref={visibleResults.length === index + 1 ? lastItemRef : null}
+              >
+                <HorizontalCard />
               </li>
             ))}
           </ul>
         )}
+        {isLoading && <p>Loading...</p>}
       </div>
     </div>
   );

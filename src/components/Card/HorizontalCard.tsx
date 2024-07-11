@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-const VerticalCard: React.FC = () => {
+const HorizontalCard: React.FC = () => {
   const navigate = useNavigate();
 
   const handleMoreClick = () => {
@@ -44,4 +44,4 @@ const VerticalCard: React.FC = () => {
   );
 };
 
-export default VerticalCard;
+export default HorizontalCard;
