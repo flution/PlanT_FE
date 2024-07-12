@@ -10,11 +10,11 @@ import LoginPage from './pages/Login/LoginPage';
 import AuthSuccessPage from './pages/Login/AuthSuccess';
 import MyPage from './pages/MyPage';
 import SearchPage from './pages/SearchPage';
+import ListPage from './pages/ListPage';
 
 const App: React.FC = () => {
   return (
     <div>
-      {/* {!hideNavbarPaths.includes(location.pathname) && } */}
       <UpperNavbar />
       <Routes>
         <Route path="/main" element={<MainPage />} />
@@ -23,6 +23,7 @@ const App: React.FC = () => {
         <Route path="/auth/success" element={<AuthSuccessPage />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/list" element={<ListPage />} />
       </Routes>
       <BottomNavbar />
     </div>
