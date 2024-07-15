@@ -113,7 +113,7 @@ const LCarousel: React.FC<{
         >
           <img
             src="/img/carousel01.jpg"
-            className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            className="absolute block w-full h-full object-cover"
             alt="carousel 1"
           />
         </div>
@@ -124,7 +124,7 @@ const LCarousel: React.FC<{
         >
           <img
             src="/img/carousel02.jpg"
-            className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            className="absolute block w-full h-full object-cover"
             alt="carousel 2"
           />
         </div>
@@ -135,7 +135,7 @@ const LCarousel: React.FC<{
         >
           <img
             src="/img/carousel03.jpeg"
-            className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            className="absolute block w-full h-full object-cover"
             alt="carousel 3"
           />
         </div>
