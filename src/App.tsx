@@ -11,6 +11,7 @@ import AuthSuccessPage from './pages/Login/AuthSuccess';
 import MyPage from './pages/MyPage';
 import SearchPage from './pages/SearchPage';
 import ListPage from './pages/ListPage';
+import ErrorPage from './pages/ErrorPage';
 
 const App: React.FC = () => {
   return (
@@ -24,6 +25,7 @@ const App: React.FC = () => {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/list" element={<ListPage />} />
+        <Route path="/error" element={<ErrorPage />} />
       </Routes>
       <BottomNavbar />
     </div>
