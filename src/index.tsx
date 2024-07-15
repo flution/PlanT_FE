@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 import App from './App';
 import LandingPage from './pages/LandingPage';
 import './index.css';
@@ -16,16 +18,18 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/local" element={<LocalLogin />} />
-        <Route path="/local/Signup" element={<LocalSignup />} />
-        {/* <Route path="/local/FindId" element={<LocalLoginFindId />} /> */}
-        <Route path="/*" element={<App />} />
-      </Routes>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/local" element={<LocalLogin />} />
+          <Route path="/local/Signup" element={<LocalSignup />} />
+          {/* <Route path="/local/FindId" element={<LocalLoginFindId />} /> */}
+          <Route path="/*" element={<App />} />
+        </Routes>
+      </Router>
+    </Provider>
   </React.StrictMode>,
 );
 
