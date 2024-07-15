@@ -1,11 +1,11 @@
 import React from 'react';
-import SearchBar from '../components/Search/SearchBar';
+import VerticalCard from '../components/Card/VerticalCard';
 
 const DetailPage: React.FC = () => {
   return (
     <div>
       <h1>Detail Page</h1>
-      <SearchBar />
+      <VerticalCard title={''} content={''} imageUrl={''}></VerticalCard>
     </div>
   );
 };
