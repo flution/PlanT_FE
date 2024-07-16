@@ -1,21 +1,116 @@
-import React, { useState } from 'react';
-import { Label, Modal, TextInput } from 'flowbite-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Label, Modal, TextInput, Textarea } from 'flowbite-react';
 import ButtonBig from '../../components/Button/ButtonBig';
+
+interface Plan {
+  date: string;
+  startTime: string;
+  endTime: string;
+  schedule: string;
+  place: string;
+  cost: string;
+  content: string;
+}
 
 const WritePlanPage: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
   const [schedule, setSchedule] = useState('');
+  const [place, setPlace] = useState('');
+  const [cost, setCost] = useState('');
+  const [content, setContent] = useState('');
+  const [plans, setPlans] = useState<Plan[]>([]);
+  const [selectedDate, setSelectedDate] = useState('');
+  const [days, setDays] = useState<{ date: Date; dayString: string }[]>([]);
+  const [searchParams] = useSearchParams();
+  const plansEndRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const p_id = searchParams.get('p_id');
 
-  function onCloseModal() {
+  useEffect(() => {
+    const startDate = searchParams.get('startDate');
+    const endDate = searchParams.get('endDate');
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const daysArray: { date: Date; dayString: string }[] = [];
+      const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
+      for (
+        let date = new Date(start);
+        date <= end;
+        date.setDate(date.getDate() + 1)
+      ) {
+        const newDate = new Date(date);
+        daysArray.push({
+          date: newDate,
+          dayString: `${newDate.getMonth() + 1}월 ${newDate.getDate()}일 (${dayNames[newDate.getDay()]})`,
+        });
+      }
+      setDays(daysArray);
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (plansEndRef.current) {
+      plansEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [plans]);
+
+  const onCloseModal = () => {
     setOpenModal(false);
+    setStartTime('');
+    setEndTime('');
     setSchedule('');
-  }
+    setPlace('');
+    setCost('');
+    setContent('');
+  };
 
-  const handleAddPlan = () => {
+  const handleAddPlan = (date: Date) => {
+    setSelectedDate(date.toISOString().split('T')[0]);
     setOpenModal(true);
   };
 
-  const handleWrite = () => {};
+  const handleWrite = async () => {
+    if (!startTime || !endTime || !schedule || !place || !cost || !content) {
+      alert('모두 입력해주세요.');
+      return;
+    }
+
+    const newPlan: Plan = {
+      date: selectedDate,
+      startTime,
+      endTime,
+      schedule,
+      place,
+      cost,
+      content,
+    };
+    setPlans([...plans, newPlan]);
+
+    try {
+      await axios.post('http://localhost:8080/api/plans', {
+        p_id,
+        pl_date: selectedDate,
+        pl_startTime: startTime,
+        pl_endTime: endTime,
+        pl_schedule: schedule,
+        pl_place: place,
+        pl_cost: cost,
+        pl_content: content,
+      });
+      onCloseModal();
+    } catch (error) {
+      console.error('Error inserting plan:', error);
+    }
+  };
+
+  const handleSubmit = () => {
+    navigate('/main');
+  };
 
   return (
     <div className="mx-6 my-7">
@@ -23,14 +118,51 @@ const WritePlanPage: React.FC = () => {
         새로운 여행을 계획하세요
       </p>
 
-      <div className="plan-table">
-        <p className="ml-1 mb-1 font-['Nexon-Medium'] text-[15px]">월 일</p>
-
-        <ButtonBig
-          text={'계획 추가'}
-          bgColor={'white'}
-          onClick={handleAddPlan}
-        ></ButtonBig>
+      <div className="mb-32 plan-table">
+        {days.map((day, index) => (
+          <div key={index} className="mb-4">
+            <p className="ml-1 mb-1 font-['Nexon-Medium'] text-[15px]">
+              {day.dayString}
+            </p>
+            {plans
+              .filter(
+                (plan) => plan.date === day.date.toISOString().split('T')[0],
+              )
+              .map((plan, idx) => (
+                <div
+                  key={idx}
+                  className="px-5 py-3 my-2 border-2 rounded-md border-main-green"
+                >
+                  <p>
+                    <span className="font-[Nexon-Bold] mr-5">시간</span>
+                    {plan.startTime} - {plan.endTime}
+                  </p>
+                  <p>
+                    <span className="font-[Nexon-Bold] mr-5">일정</span>
+                    {plan.schedule}
+                  </p>
+                  <p>
+                    <span className="font-[Nexon-Bold] mr-5">장소</span>
+                    {plan.place}
+                  </p>
+                  <p>
+                    <span className="font-[Nexon-Bold] mr-5">비용</span>
+                    {plan.cost}
+                  </p>
+                  <p>
+                    <span className="font-[Nexon-Bold] mr-5">내용</span>
+                    {plan.content}
+                  </p>
+                </div>
+              ))}
+            <ButtonBig
+              text={'계획 추가'}
+              bgColor={'white'}
+              onClick={() => handleAddPlan(day.date)}
+            />
+          </div>
+        ))}
+        <div ref={plansEndRef} />
       </div>
 
       {/* 계획 작성 모달 */}
@@ -42,8 +174,8 @@ const WritePlanPage: React.FC = () => {
         className="flex items-center justify-center bg-gray-700 bg-opacity-50"
       >
         <Modal.Header />
-        <Modal.Body className="bg-white rounded-lg">
-          <div className="px-8 py-5 space-y-5">
+        <Modal.Body className="p-5 bg-white rounded-lg">
+          <div className="px-2 space-y-5">
             {/* 시간 */}
             <form className="max-w-[16rem] mx-auto grid grid-cols-2 gap-4">
               <div>
@@ -72,6 +204,8 @@ const WritePlanPage: React.FC = () => {
                   <input
                     type="time"
                     id="start-time"
+                    value={startTime}
+                    onChange={(e) => setStartTime(e.target.value)}
                     className="outline-none bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-hover-green focus:border-hover-green block w-full p-2.5"
                     min="09:00"
                     max="18:00"
@@ -106,6 +240,8 @@ const WritePlanPage: React.FC = () => {
                   <input
                     type="time"
                     id="end-time"
+                    value={endTime}
+                    onChange={(e) => setEndTime(e.target.value)}
                     className="outline-none bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-hover-green focus:border-hover-green block w-full p-2.5"
                     min="09:00"
                     max="18:00"
@@ -114,6 +250,7 @@ const WritePlanPage: React.FC = () => {
                 </div>
               </div>
             </form>
+
             {/* 일정 */}
             <div>
               <div className="block mb-2">
@@ -146,6 +283,8 @@ const WritePlanPage: React.FC = () => {
                 id="place"
                 type="text"
                 placeholder="장소를 입력하세요"
+                value={place}
+                onChange={(event) => setPlace(event.target.value)}
                 required
               />
             </div>
@@ -163,6 +302,27 @@ const WritePlanPage: React.FC = () => {
                 id="price"
                 type="text"
                 placeholder="비용을 입력하세요"
+                value={cost}
+                onChange={(event) => setCost(event.target.value)}
+                required
+              />
+            </div>
+
+            {/* 내용 */}
+            <div>
+              <div className="block mb-2">
+                <Label
+                  htmlFor="text"
+                  value="내용"
+                  className="ml-1 text-sm font-['Nexon-Midium']"
+                />
+              </div>
+              <Textarea
+                id="content"
+                placeholder="내용을 입력하세요"
+                rows={4}
+                value={content}
+                onChange={(event) => setContent(event.target.value)}
                 required
               />
             </div>
@@ -176,11 +336,11 @@ const WritePlanPage: React.FC = () => {
         </Modal.Body>
       </Modal>
 
-      <div className="fixed left-0 w-full p-6 bg-white bottom-14">
+      <div className="fixed left-0 w-full px-6 pt-1 pb-6 bg-white bottom-14">
         <ButtonBig
           text={'작성하기'}
           bgColor={'main-green'}
-          onClick={handleWrite}
+          onClick={handleSubmit}
         />
       </div>
     </div>

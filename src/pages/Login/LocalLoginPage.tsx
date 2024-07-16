@@ -18,7 +18,9 @@ const LocalLoginPage: React.FC = () => {
           u_email: email,
           u_pw: password,
         },
+        { withCredentials: true },
       );
+      console.log(response.data);
 
       if (response.status === 200) {
         alert('로그인이 완료되었습니다.');
