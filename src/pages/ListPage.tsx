@@ -122,7 +122,7 @@ const ListPage: React.FC = () => {
                 className="p-2"
                 ref={visibleList.length === index + 1 ? lastItemRef : null}
               >
-                <VerticalCard title={''} content={''} imageUrl={''} />
+                <VerticalCard title="title" content="content" imageUrl="" />
               </li>
             ))}
           </ul>
