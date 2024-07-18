@@ -17,7 +17,7 @@ const UpperNavbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-white border-gray-200 shadow-gray-50">
+    <nav className="fixed top-0 left-0 right-0 bg-white border-gray-200 shadow-md z-10">
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           {isMainPage ? (

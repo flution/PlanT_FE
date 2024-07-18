@@ -1,10 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { Plan } from '../../slices/planSlice';
 
-const PlanTimeline: React.FC = () => {
-  const plans = useSelector((state: RootState) => state.plan.plans);
+interface PlanTimelineProps {
+  plans: Plan[];
+}
 
+const PlanTimeline: React.FC<PlanTimelineProps> = ({ plans }) => {
   return (
     <ol
       className="relative border-s border-gray-200 dark:border-gray-700"

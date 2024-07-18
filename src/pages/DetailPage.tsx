@@ -1,34 +1,40 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchMockPlans } from '../api/mockPlanApi'; // Mock 데이터를 가져오는 import
-// import { fetchPlans } from '../api/planapi'; // 실제 데이터를 가져오는 import
-import { setPlans } from '../features/plan/planSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { AppDispatch, RootState } from '../store/store';
+import { loadPlanById } from '../slices/planSlice';
 import PlanTable from '../components/Plan/PlanTable';
 import PlanTimeline from '../components/Plan/PlanTimeline';
 
 const DetailPage: React.FC = () => {
-  const dispatch = useDispatch();
-
-  // 실제 db에서 api값을 가져올때 쓸 코드
-  // useEffect(() => {
-  //   const getPlans = async () => {
-  //     const plans = await fetchPlans();
-  //     dispatch(setPlans(plans));
-  //   };
+  const { p_id } = useParams<{ p_id: string }>();
+  const dispatch: AppDispatch = useDispatch();
+  const { loading, error, plans } = useSelector(
+    (state: RootState) => state.plan,
+  );
 
   useEffect(() => {
-    const getPlans = async () => {
-      const plans = await fetchMockPlans();
-      dispatch(setPlans(plans));
-    };
+    if (p_id) {
+      dispatch(loadPlanById(p_id));
+    }
+  }, [dispatch, p_id]);
 
-    getPlans();
-  }, [dispatch]);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
-    <div>
-      <PlanTable />
-      <PlanTimeline />
+    <div className="flex flex-col items-center justify-center mt-16 mb-16">
+      <div className="w-full max-w-4xl p-4">
+        <PlanTable plans={plans} />
+        <div className="mt-8">
+          <PlanTimeline plans={plans} />
+        </div>
+      </div>
     </div>
   );
 };
