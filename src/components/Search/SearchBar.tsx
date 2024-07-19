@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import SearchButton from '../Button/SearchButton';
 import HorizontalCard from '../Card/HorizontalCard';
+import axios from 'axios';
 
 interface Result {
   name: string;
@@ -97,8 +98,10 @@ const SearchBar: React.FC = () => {
     ];
 
     try {
-      const response = await fetch(`https://api.example.com/search?q=${query}`);
-      const data = await response.json();
+      const response = await axios.get(
+        `http://localhost:8080/api/search/searchPost?query=${encodeURIComponent(query)}`,
+      );
+      const data = await response.data.post;
       if (query.trim() === '') {
         // 공백 상황에서는 모든 데이터를 가나다 순으로 정렬하여 호출
         const sortedResults = data.sort((a: Result, b: Result) =>
