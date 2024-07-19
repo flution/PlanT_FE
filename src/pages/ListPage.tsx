@@ -1,13 +1,17 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import VerticalCard from '../components/Card/VerticalCard';
+import axios from 'axios';
 
-interface Result {
-  name: string;
+interface Post {
+  p_id: number;
+  p_title: string;
+  p_like: number;
+  uno: number;
 }
 
 const ListPage: React.FC = () => {
-  const [list, setList] = useState<Result[]>([]);
-  const [visibleList, setVisibleList] = useState<Result[]>([]);
+  const [list, setList] = useState<Post[]>([]);
+  const [visibleList, setVisibleList] = useState<Post[]>([]);
   const [index, setIndex] = useState(0); //현재 보여주고 있는 데이터의 인덱스
   const batchSize = 3; // 한 번에 보여줄 데이터 개수
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +33,7 @@ const ListPage: React.FC = () => {
   );
 
   useEffect(() => {
-    search();
+    load();
   }, []);
 
   const loadMoreItems = () => {
@@ -40,75 +44,45 @@ const ListPage: React.FC = () => {
     ]);
     setIndex((prevIndex) => prevIndex + batchSize);
     console.log('load');
+    console.log(`list : ${list.length}`);
+    console.log(`visibleList : ${visibleList.length}`);
     setIsLoading(false);
   };
 
-  const search = async () => {
+  const load = async () => {
     setIndex(0);
     setVisibleList([]);
     setList([]);
     setIsLoading(true);
 
-    const mocklist = [
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-    ];
+    // const mocklist = [
+    //   { name: '서울' },
+    //   { name: '부산' },
+    //   { name: '제주도' },
+    //   { name: '강릉' },
+    //   { name: '전주' },
+    //   { name: '서울' },
+    // ];
 
-    // try {
-    //   const response = await fetch(`https://api.example.com/search`);
-    //   const data = await response.json();
-    //   setList([...mocklist, ...data]);
-    //   setVisibleList(list.slice(0, batchSize));
-    //   setIndex(batchSize);
-    // } catch (error) {
-    //   console.error('Error fetching search list:', error);
-    // } finally {
-    //   setIsLoading(false);
-    // }
+    try {
+      const response0 = await axios.get(
+        `http://localhost:8080/api/list/loadPost`,
+      );
+      const post = await response0.data.posts;
+      setList(post);
+      setVisibleList(post.slice(0, batchSize));
+      setIndex(batchSize);
+    } catch (error) {
+      console.error('Error fetching search list:', error);
+    } finally {
+      setIsLoading(false);
+    }
 
-    //무한스크롤 작동 테스트 코드
-    setList(mocklist);
-    setVisibleList(mocklist.slice(0, batchSize));
-    setIndex(batchSize);
-    setIsLoading(false);
+    // //무한스크롤 작동 테스트 코드
+    // setList(mocklist);
+    // setVisibleList(mocklist.slice(0, batchSize));
+    // setIndex(batchSize);
+    // setIsLoading(false);
   };
 
   return (
@@ -122,7 +96,11 @@ const ListPage: React.FC = () => {
                 className="p-2"
                 ref={visibleList.length === index + 1 ? lastItemRef : null}
               >
-                <VerticalCard title="title" content="content" imageUrl="" />
+                <VerticalCard
+                  title={result.p_title}
+                  content=""
+                  imageUrl={process.env.PUBLIC_URL + '/img/eximgV.png'}
+                />
               </li>
             ))}
           </ul>
