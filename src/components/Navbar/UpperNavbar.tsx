@@ -18,15 +18,10 @@ const UpperNavbar: React.FC = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-10 bg-white border-gray-200 shadow-md">
-      <div className="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
+      <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 py-2 mx-auto">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           {isMainPage ? (
-            <img
-              src="https://flowbite.com/docs/images/logo.svg"
-              className="h-6"
-              alt="Flowbite Logo"
-              style={{ marginLeft: '10px', marginTop: '10px' }}
-            />
+            <img src="/img/logo.png" className="h-12" alt="logo" />
           ) : (
             <img
               src="/img/Back.svg" // 뒤로가기 SVG 파일 경로
@@ -43,7 +38,7 @@ const UpperNavbar: React.FC = () => {
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <img
-              src="/img/Alarm2.svg"
+              src="/img/bell2.svg"
               className="h-6"
               alt="Alarm"
               style={{ marginRight: '10px', marginTop: '10px' }}
