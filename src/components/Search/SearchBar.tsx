@@ -4,7 +4,10 @@ import HorizontalCard from '../Card/HorizontalCard';
 import axios from 'axios';
 
 interface Result {
-  name: string;
+  p_id: number;
+  p_title: string;
+  p_like: number;
+  uno: number;
 }
 
 const SearchBar: React.FC = () => {
@@ -54,68 +57,34 @@ const SearchBar: React.FC = () => {
     setResults([]);
     setIsLoading(true);
 
-    const mockResults = [
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-      { name: '서울' },
-      { name: '부산' },
-      { name: '제주도' },
-      { name: '강릉' },
-      { name: '전주' },
-    ];
+    // const mockResults = [
+    //   { name: '서울' },
+    //   { name: '부산' },
+    //   { name: '제주도' },
+    //   { name: '강릉' },
+    //   { name: '전주' },
+    //   { name: '서울' },
+    // ];
 
     try {
       const response = await axios.get(
         `http://localhost:8080/api/search/searchPost?query=${encodeURIComponent(query)}`,
       );
-      const data = await response.data.post;
-      if (query.trim() === '') {
-        // 공백 상황에서는 모든 데이터를 가나다 순으로 정렬하여 호출
-        const sortedResults = data.sort((a: Result, b: Result) =>
-          a.name.localeCompare(b.name),
-        );
-        setResults(sortedResults);
-      } else {
-        // 검색어와 일치하는 결과를 필터링하고 가나다 순으로 정렬
-        const filteredResults = data
-          .filter((result: Result) => result.name.includes(query))
-          .sort((a: Result, b: Result) => a.name.localeCompare(b.name));
-        setResults(filteredResults);
-      }
-      setResults([...mockResults, ...results]);
+      const data = await response.data.posts;
+      // if (query.trim() === '') {
+      //   // 공백 상황에서는 모든 데이터를 가나다 순으로 정렬하여 호출
+      //   const sortedResults = data.sort((a: Result, b: Result) =>
+      //     a.p_title.localeCompare(b.p_title),
+      //   );
+      //   setResults(sortedResults);
+      // } else {
+      //   // 검색어와 일치하는 결과를 필터링하고 가나다 순으로 정렬
+      //   const filteredResults = data
+      //     .filter((result: Result) => result.p_title.includes(query))
+      //     .sort((a: Result, b: Result) => a.p_title.localeCompare(b.p_title));
+      //   setResults(filteredResults);
+      // }
+      setResults([...data]);
       setVisibleResults(results.slice(0, batchSize));
       setIndex(batchSize);
     } catch (error) {
@@ -205,7 +174,11 @@ const SearchBar: React.FC = () => {
                 className="p-2"
                 ref={visibleResults.length === index + 1 ? lastItemRef : null}
               >
-                <HorizontalCard />
+                <HorizontalCard
+                  title={result.p_title}
+                  content=""
+                  imageUrl={process.env.PUBLIC_URL + '/img/eximgH.png'}
+                />
               </li>
             ))}
           </ul>
