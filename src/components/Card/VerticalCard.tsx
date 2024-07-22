@@ -1,29 +1,23 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 interface VerticalCardProps {
   title: string;
   content: string;
   imageUrl: string;
+  onClick: () => void;
 }
 
 const VerticalCard: React.FC<VerticalCardProps> = ({
   title,
   content,
   imageUrl,
+  onClick,
 }) => {
-  const navigate = useNavigate();
-
-  const handleMoreClick = () => {
-    navigate('/detail');
-  };
-
   return (
     <div
       className="w-full max-w-[300px] h-[270px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-1.5"
       onClick={handleMoreClick}
     >
-      {/* card img */}
       <a href="#">
         <img
           className="w-full h-[150px] rounded-t-lg object-cover"
@@ -33,17 +27,13 @@ const VerticalCard: React.FC<VerticalCardProps> = ({
       </a>
 
       <div className="p-5">
-        {/* card content top */}
         <div className="flex justify-between mb-3.5">
-          {/* card title */}
           <a href="#">
             <h5 className="text-xs font-bold tracking-tight text-gray-900 dark:text-white">
               {title}
             </h5>
           </a>
-          {/* card btn */}
           <div className="flex card-svg-wrap">
-            {/* like */}
             <a href="#">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +49,6 @@ const VerticalCard: React.FC<VerticalCardProps> = ({
                 />
               </svg>
             </a>
-            {/* bookmark */}
             <a href="#">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -77,9 +66,6 @@ const VerticalCard: React.FC<VerticalCardProps> = ({
             </a>
           </div>
         </div>
-
-        {/* card content bottom */}
-        {/* 임시로 p태그 3개 이용하여 텍스트 출력 */}
         <p className="text-[6px] font-['Nexon-Bold'] text-gray-dark dark:text-gray-400 whitespace-pre-line">
           {content}
         </p>

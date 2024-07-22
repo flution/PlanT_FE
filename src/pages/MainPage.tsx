@@ -3,6 +3,7 @@ import PageCarousel, {
   CarouselInstance,
 } from '../components/Landing/PageCarousel';
 import VerticalCard from '../components/Card/VerticalCard';
+import { useNavigate } from 'react-router-dom';
 
 interface Card {
   id: number;
@@ -14,6 +15,7 @@ interface Card {
 const MainPage: React.FC = () => {
   const [cards, setCards] = useState<Card[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch data from an actual DB
@@ -49,6 +51,10 @@ const MainPage: React.FC = () => {
     fetchCards();
   }, []);
 
+  const handleCardClick = (id: number) => {
+    navigate(`/detail/${id}`);
+  };
+
   const handleCarouselInstance = useCallback(
     (instance: CarouselInstance | null) => {
       console.log(instance);
@@ -75,6 +81,7 @@ const MainPage: React.FC = () => {
                 title={card.title}
                 content={card.content}
                 imageUrl={card.imageUrl}
+                onClick={() => handleCardClick(card.id)}
               />
             ))}
           </PageCarousel>
