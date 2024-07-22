@@ -1,10 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import App from './App';
-import LandingPage from './components/LandingPage';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import { PersistGate } from 'redux-persist/integration/react';
+import store, { persistor } from './store/store';
+
+import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/Login/LoginPage';
+import LocalLogin from './pages/Login/LocalLoginPage';
+import LocalSignup from './pages/Login/LocalSignUp';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -12,12 +19,19 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/*" element={<App />} />
-      </Routes>
-    </Router>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/local" element={<LocalLogin />} />
+            <Route path="/local/Signup" element={<LocalSignup />} />
+            <Route path="/*" element={<App />} />
+          </Routes>
+        </Router>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>,
 );
 
