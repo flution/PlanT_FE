@@ -93,7 +93,7 @@ const PageCarousel: React.FC<{
       style={{ height: '270px' }} // Set height of parent container
     >
       <div
-        className="relative flex transition-transform ease-out duration-500"
+        className="relative flex transition-transform duration-500 ease-out"
         style={{ transform: `translateX(${currentIndex * -300}px)` }}
       >
         {React.Children.map(children, (child, index) => (
@@ -107,7 +107,7 @@ const PageCarousel: React.FC<{
             onTouchStart={touchStart}
             onTouchEnd={touchEnd}
           >
-            <div className="w-full h-full flex items-center justify-center">
+            <div className="flex items-center justify-center w-full h-full">
               {child}
             </div>
           </div>
