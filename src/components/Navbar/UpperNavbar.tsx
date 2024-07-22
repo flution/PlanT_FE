@@ -17,7 +17,7 @@ const UpperNavbar: React.FC = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white border-gray-200 shadow-md z-10">
+    <nav className="fixed top-0 left-0 right-0 z-10 bg-white border-gray-200 shadow-md">
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           {isMainPage ? (
@@ -29,7 +29,7 @@ const UpperNavbar: React.FC = () => {
             />
           ) : (
             <img
-              src="/img/back.svg" // 뒤로가기 SVG 파일 경로
+              src="/img/Back.svg" // 뒤로가기 SVG 파일 경로
               className="h-6 cursor-pointer"
               alt="Back"
               style={{ marginLeft: '10px', marginTop: '10px' }}
