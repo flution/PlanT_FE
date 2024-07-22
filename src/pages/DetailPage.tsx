@@ -34,11 +34,31 @@ const DetailPage: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center mt-16 mb-16">
-      <div className="w-full max-w-4xl p-4">
-        <PlanTable plans={plans || []} />
-        <div className="mt-8">
-          <PlanTimeline plans={plans || []} />
+    <div className="flex flex-col items-center min-h-screen font-[Nexon]">
+      <div className="flex w-full h-[70px] bg-white">
+        <label
+          htmlFor="email"
+          className="block ml-5 text-2xl font-bold text-gray-900 mt-7 mb-7 dark:text-white"
+        >
+          일정 테이블
+        </label>
+      </div>
+      <div className="flex flex-col items-center justify-center mt-16 mb-16">
+        <div className="w-full max-w-4xl p-4">
+          <div className="flex flex-col items-start space-y-8">
+            <PlanTable plans={plans || []} />
+            <div className="w-full">
+              <div className="flex w-full h-[70px] bg-white">
+                <label
+                  htmlFor="email"
+                  className="block ml-5 text-2xl font-bold text-gray-900 mt-7 mb-7 dark:text-white"
+                >
+                  타임라인
+                </label>
+              </div>
+              <PlanTimeline plans={plans || []} />
+            </div>
+          </div>
         </div>
       </div>
     </div>

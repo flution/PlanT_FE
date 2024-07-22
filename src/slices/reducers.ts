@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 import { loadPlanById } from './actions';
 import { Plan } from '../types';
 
@@ -14,27 +14,20 @@ const initialState: PlanState = {
   error: null,
 };
 
-const planDetailSlice = createSlice({
-  name: 'planDetail',
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(loadPlanById.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(
-        loadPlanById.fulfilled,
-        (state, action: PayloadAction<Plan[]>) => {
-          state.loading = false;
-          state.plans = action.payload;
-        },
-      )
-      .addCase(loadPlanById.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || 'Something went wrong';
-      });
-  },
+const planReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(loadPlanById.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(loadPlanById.fulfilled, (state, action) => {
+      state.loading = false;
+      state.plans = action.payload;
+    })
+    .addCase(loadPlanById.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || 'Failed to load plans';
+    });
 });
 
-export default planDetailSlice.reducer;
+export default planReducer;
