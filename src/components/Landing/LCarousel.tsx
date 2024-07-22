@@ -105,15 +105,15 @@ const LCarousel: React.FC<{
       className="relative w-full"
       data-carousel="slide"
     >
-      <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+      <div className="relative h-[500px] overflow-hidden rounded-lg md:h-96">
         <div
           id="carousel-item-1"
           className="hidden duration-700 ease-in-out"
           data-carousel-item
         >
           <img
-            src="/img/carousel01.jpg"
-            className="absolute block w-full h-full object-cover"
+            src="/img/carousel01.png"
+            className="absolute block object-cover w-full h-full"
             alt="carousel 1"
           />
         </div>
@@ -123,8 +123,8 @@ const LCarousel: React.FC<{
           data-carousel-item
         >
           <img
-            src="/img/carousel02.jpg"
-            className="absolute block w-full h-full object-cover"
+            src="/img/carousel02.png"
+            className="absolute block object-cover w-full h-full"
             alt="carousel 2"
           />
         </div>
@@ -134,8 +134,8 @@ const LCarousel: React.FC<{
           data-carousel-item
         >
           <img
-            src="/img/carousel03.jpeg"
-            className="absolute block w-full h-full object-cover"
+            src="/img/carousel03.png"
+            className="absolute block object-cover w-full h-full"
             alt="carousel 3"
           />
         </div>

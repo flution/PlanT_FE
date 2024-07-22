@@ -8,10 +8,9 @@ const LandingPage: React.FC = () => {
     useState<CarouselInterface | null>(null);
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="w-full h-[160px] bg-white"></div>
+    <div className="flex flex-col items-center mt-10">
       <LCarousel onCarouselInstance={setCarouselInstance} />
-      <div className="w-full h-[100px] bg-white"></div>
+      <div className="mb-5"></div>
       <Button
         text="시작하기"
         carouselInstance={carouselInstance}
