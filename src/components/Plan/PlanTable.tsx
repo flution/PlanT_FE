@@ -1,48 +1,38 @@
 import React from 'react';
-import { Plan } from '../../slices/planSlice';
+import { Plan } from '../../types';
 
 interface PlanTableProps {
   plans: Plan[];
 }
 
-const PlanTable: React.FC<PlanTableProps> = ({ plans }) => {
+const PlanTable: React.FC<PlanTableProps> = ({ plans = [] }) => {
+  if (!plans.length) {
+    return <div>계획이 없습니다.</div>;
+  }
+
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full border-collapse">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="p-2 text-gray-600 font-bold border border-gray-300 w-2/5">
-              Date
-            </th>
-            <th className="p-2 text-gray-600 font-bold border border-gray-300 w-3/5">
-              Schedule
-            </th>
+    <table className="min-w-full divide-y divide-gray-200">
+      <thead className="bg-gray-50">
+        <tr>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            시간
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            장소
+          </th>
+        </tr>
+      </thead>
+      <tbody className="bg-white divide-y divide-gray-200">
+        {plans.map((plan, index) => (
+          <tr key={index}>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{`${plan.pl_startTime} - ${plan.pl_endTime}`}</td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {plan.pl_place}
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {plans.map((plan, index) => (
-            <tr key={index} className="bg-white border border-gray-300">
-              <td className="p-2 border border-gray-300">
-                <input
-                  type="text"
-                  value={plan.date}
-                  readOnly
-                  className="w-full bg-white text-gray-900"
-                />
-              </td>
-              <td className="p-2 border border-gray-300">
-                <input
-                  type="text"
-                  value={plan.schedule}
-                  readOnly
-                  className="w-full bg-white text-gray-900"
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        ))}
+      </tbody>
+    </table>
   );
 };
 
