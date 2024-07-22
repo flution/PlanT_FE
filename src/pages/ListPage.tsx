@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import VerticalCard from '../components/Card/VerticalCard';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface Post {
   p_id: number;
@@ -12,9 +13,10 @@ interface Post {
 const ListPage: React.FC = () => {
   const [list, setList] = useState<Post[]>([]);
   const [visibleList, setVisibleList] = useState<Post[]>([]);
-  const [index, setIndex] = useState(0); //현재 보여주고 있는 데이터의 인덱스
-  const batchSize = 3; // 한 번에 보여줄 데이터 개수
+  const [index, setIndex] = useState(0);
+  const batchSize = 3;
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const observer = useRef<IntersectionObserver | null>(null);
 
@@ -43,9 +45,6 @@ const ListPage: React.FC = () => {
       ...list.slice(index, index + batchSize),
     ]);
     setIndex((prevIndex) => prevIndex + batchSize);
-    console.log('load');
-    console.log(`list : ${list.length}`);
-    console.log(`visibleList : ${visibleList.length}`);
     setIsLoading(false);
   };
 
@@ -55,20 +54,11 @@ const ListPage: React.FC = () => {
     setList([]);
     setIsLoading(true);
 
-    // const mocklist = [
-    //   { name: '서울' },
-    //   { name: '부산' },
-    //   { name: '제주도' },
-    //   { name: '강릉' },
-    //   { name: '전주' },
-    //   { name: '서울' },
-    // ];
-
     try {
-      const response0 = await axios.get(
+      const response = await axios.get(
         `http://localhost:8080/api/list/loadPost`,
       );
-      const post = await response0.data.posts;
+      const post = await response.data.posts;
       setList(post);
       setVisibleList(post.slice(0, batchSize));
       setIndex(batchSize);
@@ -77,12 +67,10 @@ const ListPage: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
+  };
 
-    // //무한스크롤 작동 테스트 코드
-    // setList(mocklist);
-    // setVisibleList(mocklist.slice(0, batchSize));
-    // setIndex(batchSize);
-    // setIsLoading(false);
+  const handleCardClick = (p_id: number) => {
+    navigate(`/detail/${p_id}`);
   };
 
   return (
@@ -92,7 +80,7 @@ const ListPage: React.FC = () => {
           <ul className="mt-4">
             {visibleList.map((result, index) => (
               <li
-                key={index}
+                key={result.p_id}
                 className="p-2"
                 ref={visibleList.length === index + 1 ? lastItemRef : null}
               >
@@ -100,6 +88,7 @@ const ListPage: React.FC = () => {
                   title={result.p_title}
                   content=""
                   imageUrl={process.env.PUBLIC_URL + '/img/eximgV.png'}
+                  onClick={() => handleCardClick(result.p_id)}
                 />
               </li>
             ))}
