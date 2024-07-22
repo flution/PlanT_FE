@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const BottomNavbar: React.FC = () => {
-  const [activeButton, setActiveButton] = useState<string | null>(null);
+  const [activeButton, setActiveButton] = useState<string>('main');
 
   const handleButtonClick = (buttonName: string) => {
     setActiveButton(buttonName);

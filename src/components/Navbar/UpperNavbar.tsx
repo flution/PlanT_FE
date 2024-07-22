@@ -17,17 +17,19 @@ const UpperNavbar: React.FC = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-10 bg-white border-gray-200 shadow-md">
+    <nav className="right-0 z-10 h-12 bg-white border-gray-200 shadow-md h-top-0">
       <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 py-2 mx-auto">
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <a
+          href="#"
+          className="flex items-center h-8 space-x-3 rtl:space-x-reverse"
+        >
           {isMainPage ? (
-            <img src="/img/logo.png" className="h-12" alt="logo" />
+            <img src="/img/logo.png" className="h-8" alt="logo" />
           ) : (
             <img
               src="/img/Back.svg" // 뒤로가기 SVG 파일 경로
-              className="h-6 cursor-pointer"
+              className="h-4 cursor-pointer ml-2.5"
               alt="Back"
-              style={{ marginLeft: '10px', marginTop: '10px' }}
               onClick={handleBackClick}
             />
           )}
@@ -39,9 +41,8 @@ const UpperNavbar: React.FC = () => {
           >
             <img
               src="/img/bell2.svg"
-              className="h-6"
+              className="h-6 ml-2.5 my-auto"
               alt="Alarm"
-              style={{ marginRight: '10px', marginTop: '10px' }}
             />
           </a>
         )}
