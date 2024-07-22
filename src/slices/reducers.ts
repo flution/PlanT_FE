@@ -28,7 +28,6 @@ const planDetailSlice = createSlice({
         (state, action: PayloadAction<Plan[]>) => {
           state.loading = false;
           state.plans = action.payload;
-          console.log('Updated state with plans:', state.plans); // 상태 업데이트 로그 추가
         },
       )
       .addCase(loadPlanById.rejected, (state, action) => {

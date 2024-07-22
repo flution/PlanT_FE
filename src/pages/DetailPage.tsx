@@ -5,7 +5,6 @@ import { AppDispatch, RootState } from '../store/store';
 import { loadPlanById } from '../slices/actions';
 import PlanTable from '../components/Plan/PlanTable';
 import PlanTimeline from '../components/Plan/PlanTimeline';
-import { Plan } from '../types';
 
 const DetailPage: React.FC = () => {
   const { p_id } = useParams<{ p_id: string }>();
@@ -37,9 +36,9 @@ const DetailPage: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center mt-16 mb-16">
       <div className="w-full max-w-4xl p-4">
-        <PlanTable plans={plans as Plan[]} />
+        <PlanTable plans={plans || []} />
         <div className="mt-8">
-          <PlanTimeline plans={plans as Plan[]} />
+          <PlanTimeline plans={plans || []} />
         </div>
       </div>
     </div>

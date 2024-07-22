@@ -23,7 +23,7 @@ const App: React.FC = () => {
       <UpperNavbar />
       <Routes>
         <Route path="/main" element={<MainPage />} />
-        <Route path="/detail" element={<DetailPage />} />
+        <Route path="/detail/:p_id" element={<DetailPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth/success" element={<AuthSuccessPage />} />
         <Route path="/mypage" element={<MyPage />} />
