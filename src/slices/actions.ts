@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Plan } from '../types';
 
 export const loadPlanById = createAsyncThunk(
-  'plans/loadPlanById',
+  'detail/loadById',
   async (p_id: string) => {
     const response = await axios.get<Plan[]>(
       `http://localhost:8080/api/details/${p_id}`,

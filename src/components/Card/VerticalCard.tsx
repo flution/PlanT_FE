@@ -11,12 +11,12 @@ const VerticalCard: React.FC<VerticalCardProps> = ({
   title,
   content,
   imageUrl,
-  onClick,
+  onClick: handleMoreClick,
 }) => {
   return (
     <div
       className="w-full max-w-[300px] h-[270px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-1.5"
-      onClick={onClick}
+      onClick={handleMoreClick}
     >
       <a href="#">
         <img
