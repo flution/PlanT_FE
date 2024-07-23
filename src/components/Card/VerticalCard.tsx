@@ -11,7 +11,7 @@ const VerticalCard: React.FC<VerticalCardProps> = ({
   title,
   content,
   imageUrl,
-  onClick,
+  onClick: handleMoreClick,
 }) => {
   return (
     <div
