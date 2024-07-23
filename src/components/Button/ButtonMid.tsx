@@ -11,10 +11,10 @@ const ButtonMid: React.FC<ButtonProps> = ({ text, bgColor }) => {
     <button
       type="button"
       className={`
-        w-[115px] h-[32px] rounded-[7.5px] px-5 py-1
+        w-[250px] h-[32px] rounded-[7.5px] px-5 py-1
         text-midBtn text-center font-[Nexon-Medium]
-        text-black bg-${bgColor} border-solid border-main-color box-border
-        hover:bg-hover-color`}
+        text-black bg-${bgColor} border border-solid border-main-green box-border
+        hover:bg-hover-green`}
     >
       {text}
     </button>

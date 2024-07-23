@@ -63,16 +63,16 @@ const MainPage: React.FC = () => {
   );
 
   return (
-    <div className="flex flex-col items-center min-h-screen font-[Nexon]">
-      <div className="flex w-full h-[70px] bg-white">
+    <div className="flex flex-col items-center font-[Nexon] mt-2 px-5 scrollbar-hide">
+      <div className="flex w-full bg-white">
         <label
           htmlFor="email"
-          className="block ml-5 text-2xl font-bold text-gray-900 mt-7 mb-7 dark:text-white"
+          className="block ml-5 font-[Nexon-Bold] text-gray-900 text-md mt-3 mb-1 dark:text-white"
         >
           MD 추천 여행
         </label>
       </div>
-      <div className="container mx-auto p-2">
+      <div className="container p-2 mx-auto">
         {isLoaded && (
           <PageCarousel onCarouselInstance={handleCarouselInstance}>
             {cards.map((card) => (

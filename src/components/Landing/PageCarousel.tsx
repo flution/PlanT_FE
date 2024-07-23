@@ -93,7 +93,7 @@ const PageCarousel: React.FC<{
       style={{ height: '270px' }} // Set height of parent container
     >
       <div
-        className="relative flex transition-transform duration-500 ease-out"
+        className="relative flex transition-transform duration-[5000ms] ease-out"
         style={{ transform: `translateX(${currentIndex * -300}px)` }}
       >
         {React.Children.map(children, (child, index) => (
