@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storageSession from 'redux-persist/lib/storage/session';
 import authReducer from '../slices/authSlice';
-import planDetailReducer from '../slices/reducers'; // 올바른 리듀서 임포트
+import planReducer from '../slices/reducers';
 
 const persistConfig = {
   key: 'root',
@@ -12,7 +12,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  planDetail: planDetailReducer, // 올바르게 추가
+  planDetail: planReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
